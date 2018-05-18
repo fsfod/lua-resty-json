@@ -1,0 +1,6 @@
+LIBRARY
+EXPORTS
+    jp_create
+    jp_parse
+    jp_get_err
+    jp_destroy
