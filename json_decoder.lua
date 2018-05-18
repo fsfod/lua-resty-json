@@ -97,7 +97,7 @@ local function load_json_parser()
     if jp_lib ~= nil then
         return jp_lib
     else
-        local so_path = find_shared_obj(package.cpath, "libljson.so")
+        local so_path = find_shared_obj(package.cpath, "libljson.dll")
         if so_path ~= nil then
             jp_lib = ffi.load(so_path)
             return jp_lib
