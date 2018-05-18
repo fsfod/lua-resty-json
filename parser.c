@@ -320,8 +320,7 @@ jp_destroy(struct json_parser* p) {
  *
  * *****************************************************************************
  */
-void __attribute__((format(printf, 2, 3), cold))
-set_parser_err_fmt(parser_t* parser, const char* fmt, ...) {
+void set_parser_err_fmt(parser_t* parser, const char* fmt, ...) {
     if (parser->err_msg)
         return;
 
@@ -354,13 +353,12 @@ set_parser_err_fmt(parser_t* parser, const char* fmt, ...) {
     va_end(vl);
 }
 
-void __attribute__((cold))
-set_parser_err(parser_t* parser, const char* str) {
+void set_parser_err(parser_t* parser, const char* str) {
     if (!parser->err_msg)
         set_parser_err_fmt(parser, "%s", str);
 }
 
-static void __attribute__((cold))
+static void
 dump_primitive_obj (FILE* f, obj_t* the_obj) {
     obj_primitive_t* obj = (obj_primitive_t*)(void*)the_obj;
 
@@ -404,7 +402,7 @@ dump_primitive_obj (FILE* f, obj_t* the_obj) {
     }
 }
 
-void __attribute__((cold))
+void 
 dump_composite_obj(FILE* f, obj_composite_t* cobj) {
     obj_ty_t type = cobj->common.obj_ty;
     if (type != OT_ARRAY && type != OT_HASHTAB) {
@@ -474,7 +472,7 @@ dump_composite_obj(FILE* f, obj_composite_t* cobj) {
     free(elmt_vect);
 }
 
-void __attribute__((cold))
+void 
 dump_obj(FILE* f, obj_t* obj) {
     if (!obj) {
         fprintf(f, "null\n");
@@ -493,7 +491,7 @@ dump_obj(FILE* f, obj_t* obj) {
     }
 }
 
-const char* __attribute__((cold))
+const char*
 jp_get_err(struct json_parser* p) {
     parser_t* parser = (parser_t*)(void*)p;
     return parser->err_msg;

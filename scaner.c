@@ -11,10 +11,10 @@
 static const char* unrecog_token = "Unrecognizable token";
 
 /* Forward decl */
-static void __attribute__((format(printf, 3, 4), cold))
+static void /*__attribute__((format(printf, 3, 4), cold))*/
 set_scan_err_fmt(scaner_t* scaner, const char* loc, const char* fmt, ...);
 
-static void __attribute__((cold))
+static void /*__attribute__((cold))*/
 set_scan_err(scaner_t* scaner, const char* loc, const char* str);
 
 static char token_predict[256];
@@ -79,7 +79,7 @@ init_esc_table() {
     esc_char['t'] = '\t';
 }
 
-static void __attribute__((constructor))
+static void /*__attribute__((constructor))*/
 init_const_table() {
     init_token_predict();
     init_esc_table();
@@ -564,7 +564,7 @@ sc_rewind (scaner_t* scaner) {
  *
  *****************************************************************
  */
-static void __attribute__((format(printf, 3, 4)))
+static void /*__attribute__((format(printf, 3, 4)))*/
 set_scan_err_fmt(scaner_t* scaner, const char* loc, const char* fmt, ...) {
     if (scaner->err_msg)
         return;
@@ -593,7 +593,7 @@ set_scan_err_fmt(scaner_t* scaner, const char* loc, const char* fmt, ...) {
     va_end(vl);
 }
 
-static void __attribute__((cold))
+static void /*__attribute__((cold))*/
 set_scan_err(scaner_t* scaner, const char* loc, const char* str) {
     if (scaner->err_msg)
         return;

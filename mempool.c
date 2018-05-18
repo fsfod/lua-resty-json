@@ -1,4 +1,7 @@
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,7 +14,11 @@ static int
 default_chunk_sz() {
     static int page_sz;
     if (!page_sz) {
+#ifdef LINUX
         page_sz = sysconf(_SC_PAGESIZE);
+#else
+      page_sz = 64000;
+#endif
         /* Adjust by malloc overhead in an attemp to fit the chunk in a page*/
         page_sz -= 64;
     }

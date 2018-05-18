@@ -7,10 +7,15 @@
 
 #include "ljson_parser.h"
 
+#ifndef _MSC_VER
+#define offsetof(t, m)  __builtin_offsetof(t, m)
 #define likely(x)   __builtin_expect((x),1)
 #define unlikely(x) __builtin_expect((x),0)
-
-#define offsetof(t, m)  __builtin_offsetof(t, m)
+#else
+#define likely(x) (x)
+#define unlikely(x) (x)
+#define strncasecmp _tcsnicmp 
+#endif
 
 #ifdef DEBUG
     #define ASSERT(c) if (!(c))\

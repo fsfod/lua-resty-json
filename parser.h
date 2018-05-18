@@ -61,10 +61,9 @@ int emit_primitive_tk(mempool_t* mp, token_t* tk, obj_composite_t* nesting_obj);
 
 void insert_subobj(obj_composite_t* nesting, obj_t* nested);
 
-void __attribute__((format(printf, 2, 3), cold))
-set_parser_err_fmt(parser_t* parser, const char* fmt, ...);
+void set_parser_err_fmt(parser_t* parser, const char* fmt, ...);
 
-void __attribute__((cold)) set_parser_err(parser_t*, const char* str);
+void set_parser_err(parser_t*, const char* str);
 
 int start_parsing_array(parser_t*);
 int start_parsing_hashtab(parser_t*);
