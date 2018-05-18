@@ -79,11 +79,28 @@ init_esc_table() {
     esc_char['t'] = '\t';
 }
 
-static void /*__attribute__((constructor))*/
-init_const_table() {
+#ifdef _MSC_VER
+#define INITIALIZER(f) \
+     void f();\
+    static int __f1(){f();return 0;}\
+    __pragma(data_seg(".CRT$XIU"))\
+    static int(*__f2) () = __f1;\
+    __pragma(data_seg())\
+     void f()
+#else
+#define INITIALIZER(f) \
+    __attribute__((constructor)) static void f()
+#endif
+
+static int init_done = 0;
+
+INITIALIZER(init_const_table) {
+    if (init_done) return;
     init_token_predict();
     init_esc_table();
+    init_done = 1;
 }
+
 
 /* On success, scaner advance the pointer right after the token just
  * recognized, and the token_t::span records span of the token in

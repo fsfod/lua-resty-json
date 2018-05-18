@@ -284,6 +284,7 @@ jp_create(void) {
     parser_t* p = (parser_t*)malloc(sizeof(parser_t));
     if (unlikely(!p))
         return 0;
+    init_const_table();
 
     mempool_t* mp = mp_create();
     if (unlikely(!mp))
