@@ -11,3 +11,4 @@ tests/unit_test
 
 /.vs/
 /Debug/
+/x64/
